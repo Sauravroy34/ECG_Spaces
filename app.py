@@ -633,18 +633,15 @@ with col_probs:
         if is_top:
             highlight = ' style="color: #34d399; font-weight: 700;"' if is_confident else ' style="color: #fbbf24; font-weight: 700;"'
 
-        bars_html += f"""
-        <div class="prob-container">
-            <div class="prob-header">
-                <span class="prob-name"{highlight}>{full_name} ({name})</span>
-                <span class="prob-value"{highlight}>{prob * 100:.2f}%</span>
-            </div>
-            <div class="prob-bar-bg">
-                <div class="prob-bar-fill"
-                     style="width: {width_pct}%; background: {color};"></div>
-            </div>
-        </div>
-        """
+        bars_html += f"""<div class="prob-container">
+    <div class="prob-header">
+        <span class="prob-name"{highlight}>{full_name} ({name})</span>
+        <span class="prob-value"{highlight}>{prob * 100:.2f}%</span>
+    </div>
+    <div class="prob-bar-bg">
+        <div class="prob-bar-fill" style="width: {width_pct}%; background: {color};"></div>
+    </div>
+</div>"""
 
     st.markdown(
         f'<div class="glass-card">{bars_html}</div>',
