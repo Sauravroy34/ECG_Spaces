@@ -62,8 +62,17 @@ st.markdown("""
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 /* ── Root overrides ────────────────────────────────────── */
-html, body, [class*="st-"] {
+html, body, [class*="st-"]:not(i):not(svg):not([class*="Icon"]):not(.material-symbols-rounded) {
     font-family: 'Inter', sans-serif;
+}
+
+/* ── Prevent Streamlit Icons from breaking ─────────────── */
+.material-symbols-rounded,
+.stIcon,
+[class*="stIcon"],
+[data-testid="stIconMaterial"],
+i {
+    font-family: 'Material Symbols Rounded', 'Material Icons', sans-serif !important;
 }
 
 /* ── Main background ───────────────────────────────────── */
