@@ -231,7 +231,10 @@ section[data-testid="stSidebar"] .stFileUploader > div {
 /* ── Hide Streamlit branding elements ──────────────────── */
 #MainMenu { visibility: hidden; }
 footer { visibility: hidden; }
-header { visibility: hidden; }
+/* Make header transparent so the sidebar toggle is still clickable */
+header { background-color: transparent !important; }
+/* Optional: Hide the viewer badge/deploy button specifically, keeping the toggle */
+.stApp > header > div:first-child { visibility: hidden; } 
 </style>
 """, unsafe_allow_html=True)
 
