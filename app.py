@@ -252,35 +252,29 @@ section[data-testid="stSidebar"] .stFileUploader > div {
 #MainMenu { visibility: hidden; }
 footer { visibility: hidden; }
 
-/* Keep the header itself present (don't collapse its height —
-   that's what was causing the toggle arrow and title to overlap),
-   just make its background transparent. */
+/* Keep the header present, just make its background transparent.
+   Do NOT set a fixed height here — that can clip the toggle arrow. */
 header[data-testid="stHeader"] {
     background-color: transparent !important;
-    height: 3.5rem;
 }
 
-/* Hide only the Deploy button / toolbar — NOT the whole header,
-   so we don't accidentally take the sidebar arrow down with it. */
-div[data-testid="stToolbar"] {
-    visibility: hidden;
-}
+/* Hide only the Deploy button by its own class — do not hide
+   the whole stToolbar container, since on some Streamlit Cloud
+   versions the sidebar arrow lives inside that same container. */
 .stDeployButton {
     display: none !important;
 }
 
-/* Force the sidebar collapse/expand arrow to always render,
-   above everything else, and be clickable. */
-[data-testid="collapsedControl"] {
+/* Force the sidebar collapse/expand arrow to always render and
+   be clickable — cover both the old and new data-testid names,
+   since this differs across Streamlit versions. */
+[data-testid="collapsedControl"],
+[data-testid="stSidebarCollapsedControl"] {
     visibility: visible !important;
     display: flex !important;
     opacity: 1 !important;
     z-index: 999999 !important;
     position: relative;
-}
-button[kind="header"] {
-    visibility: visible !important;
-    display: flex !important;
 }
 </style>
 """, unsafe_allow_html=True)
