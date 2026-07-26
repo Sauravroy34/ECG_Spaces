@@ -44,8 +44,8 @@ def get_feature_importance(
     cache: dict = {}
 
     def forward_hook(module, input, output):
-        output.retain_grad()
         cache["activations"] = output
+        output.register_hook(lambda grad: cache.update({"grads": grad}))
 
     hook = target_layer.register_forward_hook(forward_hook)
 
@@ -53,7 +53,7 @@ def get_feature_importance(
     out[0, target_index].backward()
 
     activations = cache["activations"]
-    grads = activations.grad
+    grads = cache["grads"]
 
     weights = torch.mean(grads, dim=2, keepdim=True)
     cam = torch.sum(weights * activations, dim=1)
@@ -123,6 +123,8 @@ def create_gradcam_figure(
         extent=[0, seq_length, ymin, ymax],
         alpha=0.7,
         zorder=2,
+        vmin=0.0,
+        vmax=1.0,
     )
 
     # Title & labels
