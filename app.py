@@ -662,7 +662,7 @@ st.caption(
 
 # Need gradients → enable grad for this block
 input_tensor_grad = input_tensor.clone().detach().requires_grad_(True)
-target_layer = model.model.layer2[-1].conv3
+target_layer = model.model.layer2[0].conv3
 
 gradcam_target = pred_idx
 fig_gradcam = create_gradcam_figure(
