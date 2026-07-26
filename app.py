@@ -71,6 +71,13 @@ html, body, [class*="st-"] {
     background: linear-gradient(165deg, #0a0e1a 0%, #0d1321 40%, #111827 100%);
 }
 
+/* ── Main block container: stop content from tucking under
+       the header / toggle arrow, and give it breathing room ── */
+.block-container {
+    padding-top: 3rem !important;
+    max-width: 1200px;
+}
+
 /* ── Sidebar ───────────────────────────────────────────── */
 section[data-testid="stSidebar"] {
     background: linear-gradient(180deg, #0c1220 0%, #0f172a 100%);
@@ -84,8 +91,11 @@ section[data-testid="stSidebar"] {
     border-radius: 16px;
     padding: 24px 28px;
     margin-bottom: 16px;
+    -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255,255,255,0.03);
+    position: relative;
+    z-index: 1;
 }
 
 /* ── Prediction result cards ───────────────────────────── */
@@ -228,13 +238,50 @@ section[data-testid="stSidebar"] .stFileUploader > div {
     font-weight: 500;
 }
 
-/* ── Hide Streamlit branding elements ──────────────────── */
+/* ── Columns: stack cleanly on narrow / mobile viewports
+       instead of overlapping ─────────────────────────────── */
+@media (max-width: 768px) {
+    div[data-testid="column"] {
+        width: 100% !important;
+        flex: 1 1 100% !important;
+        min-width: 100% !important;
+    }
+}
+
+/* ── Hide Streamlit branding elements (safely) ─────────── */
 #MainMenu { visibility: hidden; }
 footer { visibility: hidden; }
-/* Make header transparent so the sidebar toggle is still clickable */
-header { background-color: transparent !important; }
-/* Optional: Hide the viewer badge/deploy button specifically, keeping the toggle */
-.stApp > header > div:first-child { visibility: hidden; } 
+
+/* Keep the header itself present (don't collapse its height —
+   that's what was causing the toggle arrow and title to overlap),
+   just make its background transparent. */
+header[data-testid="stHeader"] {
+    background-color: transparent !important;
+    height: 3.5rem;
+}
+
+/* Hide only the Deploy button / toolbar — NOT the whole header,
+   so we don't accidentally take the sidebar arrow down with it. */
+div[data-testid="stToolbar"] {
+    visibility: hidden;
+}
+.stDeployButton {
+    display: none !important;
+}
+
+/* Force the sidebar collapse/expand arrow to always render,
+   above everything else, and be clickable. */
+[data-testid="collapsedControl"] {
+    visibility: visible !important;
+    display: flex !important;
+    opacity: 1 !important;
+    z-index: 999999 !important;
+    position: relative;
+}
+button[kind="header"] {
+    visibility: visible !important;
+    display: flex !important;
+}
 </style>
 """, unsafe_allow_html=True)
 
