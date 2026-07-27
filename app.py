@@ -39,7 +39,7 @@ CONFIDENCE_THRESHOLD: float = 0.60
 # ======================================================================
 HF_REPO_ID = "Codemaster67/1DResnet50_Arythmia"
 HF_FILENAME = "model.pth"
-EXPECTED_LENGTH = 5000
+EXPECTED_LENGTH = 500
 
 
 # ======================================================================
@@ -385,12 +385,11 @@ def parse_ecg_input(uploaded_file=None, json_text: str = "") -> tuple:
         else:
             return None, None  # No input yet — not an error
 
-        # Validate length
-        # if len(data) < EXPECTED_LENGTH:
-        #     return None, (
-        #         f"**Insufficient data points.** Expected {EXPECTED_LENGTH}, "
-        #         f"got {len(data)}. Please provide exactly {EXPECTED_LENGTH} values."
-        #     )
+        if len(data) < EXPECTED_LENGTH:
+            return None, (
+                f"**Insufficient data points.** Expected {EXPECTED_LENGTH}, "
+                f"got {len(data)}. Please provide exactly {EXPECTED_LENGTH} values."
+            )
 
         if len(data) > EXPECTED_LENGTH:
             data = data[:EXPECTED_LENGTH]
@@ -419,7 +418,7 @@ with st.sidebar:
 
     # Upload section
     st.markdown("#### 📤 Upload ECG Data")
-    st.caption("Upload a file with **5000 data points** (10 senconds ecg sampled at 500HZ) (single-lead ECG lead II).")
+    st.caption("Upload a file with **500 data points** (single-lead ECG lead II).")
 
     uploaded_file = st.file_uploader(
         "Choose file",
