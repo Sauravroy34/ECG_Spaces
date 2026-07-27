@@ -39,7 +39,7 @@ CONFIDENCE_THRESHOLD: float = 0.60
 # ======================================================================
 HF_REPO_ID = "Codemaster67/1DResnet_Arythmia_50percent"
 HF_FILENAME = "model.pth"
-EXPECTED_LENGTH = 5000
+EXPECTED_LENGTH = 500
 
 
 # ======================================================================
