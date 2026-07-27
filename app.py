@@ -387,11 +387,11 @@ def parse_ecg_input(uploaded_file=None, json_text: str = "") -> tuple:
 
         if len(data) < EXPECTED_LENGTH:
             st.sidebar.info(
-                f"Input had {len(data)} points. Expected {EXPECTED_LENGTH} Prediction might be inaccurate."
+                f"Input had {len(data)} points. Expected {EXPECTED_LENGTH} points Prediction might be inaccurate."
             )
 
         if len(data) > EXPECTED_LENGTH:
-            data = data[:EXPECTED_LENGTH]
+            # data = data[:EXPECTED_LENGTH]
             st.sidebar.info(
                 f"ℹ️ Input had {len(data)} points — trimmed to first {EXPECTED_LENGTH}."
             )
