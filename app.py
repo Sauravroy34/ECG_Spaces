@@ -418,7 +418,7 @@ with st.sidebar:
 
     # Upload section
     st.markdown("#### 📤 Upload ECG Data")    
-    st.caption("Model was trained on **5000 data points** (10 senconds ecg sampled at 500HZ) (single-lead ECG lead II).")
+    st.caption("Model was trained on **5000 data points** (10 senconds ecg sampled at 500HZ) (single-lead ECG lead I).")
 
     uploaded_file = st.file_uploader(
         "Choose file",
