@@ -385,16 +385,16 @@ def parse_ecg_input(uploaded_file=None, json_text: str = "") -> tuple:
         else:
             return None, None  # No input yet — not an error
 
-        if len(data) < EXPECTED_LENGTH:
+        if len(data) != EXPECTED_LENGTH:
             st.sidebar.info(
                 f"Input had {len(data)} points. Expected {EXPECTED_LENGTH} points Prediction might be inaccurate."
             )
 
-        if len(data) > EXPECTED_LENGTH:
-            # data = data[:EXPECTED_LENGTH]
-            st.sidebar.info(
-                f"ℹ️ Input had {len(data)} points — trimmed to first {EXPECTED_LENGTH}."
-            )
+        # if len(data) > EXPECTED_LENGTH:
+        #     # data = data[:EXPECTED_LENGTH]
+        #     st.sidebar.info(
+        #         f"Input had {len(data)} points. Expected {EXPECTED_LENGTH} points Prediction might be inaccurate."
+        #     )
 
         return data, None
 
@@ -416,8 +416,10 @@ with st.sidebar:
     st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
 
     # Upload section
-    st.markdown("#### 📤 Upload ECG Data")
-    st.caption("Upload a file with **500 data points** (10 senconds ecg sampled at 500HZ) (single-lead ECG lead II).")
+    st.markdown("#### 📤 Upload ECG Data")    
+    st.caption("Model was trained on *5000 data points** (10 senconds ecg sampled at 500HZ) (single-lead ECG lead II).")
+
+    st.caption("Upload a file with **5000 data points** (10 senconds ecg sampled at 500HZ) (single-lead ECG lead II).")
 
     uploaded_file = st.file_uploader(
         "Choose file",
@@ -440,7 +442,7 @@ with st.sidebar:
     st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
 
     # Info section
-    st.markdown("#### ℹ️ Model Info")
+    st.markdown("#### Model Info")
     st.markdown(
         f"""
         <div class="glass-card" style="padding: 16px 20px;">
@@ -460,7 +462,7 @@ with st.sidebar:
                 INPUT SHAPE
             </div>
             <div style="font-size:13px; color:#e2e8f0; margin-bottom:12px;">
-                (1, 1, 500)
+                (1, 1, {EXPECTED_LENGTH})
             </div>
             <div style="font-size:12px; color:#94a3b8; margin-bottom:8px;">
                 CONFIDENCE THRESHOLD
