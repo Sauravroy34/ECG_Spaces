@@ -386,16 +386,16 @@ def parse_ecg_input(uploaded_file=None, json_text: str = "") -> tuple:
         else:
             return None, None  # No input yet — not an error
 
-        if len(data) != EXPECTED_LENGTH:
+        if len(data) < EXPECTED_LENGTH:
             st.sidebar.info(
                 f"Input had {len(data)} points. Expected {EXPECTED_LENGTH} points Prediction might be inaccurate."
             )
 
-        # if len(data) > EXPECTED_LENGTH:
-        #     # data = data[:EXPECTED_LENGTH]
-        #     st.sidebar.info(
-        #         f"Input had {len(data)} points. Expected {EXPECTED_LENGTH} points Prediction might be inaccurate."
-        #     )
+        if len(data) > EXPECTED_LENGTH:
+            data = data[:EXPECTED_LENGTH]
+            st.sidebar.info(
+                f"Input had {len(data)} points. Expected {EXPECTED_LENGTH} points Prediction might be inaccurate."
+            )
 
         return data, None
 
