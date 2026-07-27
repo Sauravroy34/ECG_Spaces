@@ -679,15 +679,18 @@ st.markdown(
     """
     <div style="text-align: center; padding: 16px 0; color: #475569; font-size: 12px;">
         Built with Streamlit · Model: ResNet-50 (1D) · 
-        <a href="https://huggingface.co/Codemaster67/1DResnet50_Arythmia" 
-           target="_blank" style="color: #67e8f9; text-decoration: none;">
-            View on HuggingFace
+        <a href="https://huggingface.co/Codemaster67/1DResnet50_Arythmia"
+           target="_blank"
+           style="color: #67e8f9; text-decoration: none;">
+            View on Hugging Face
         </a>
-
-        Trained on 'a-large-scale-12-lead-electrocardiogram-database-for-arrhythmia-study-1.0.0' dataset · 
-        <a href="https://physionet.org/content/ecg-arrhythmia/1.0.0/" 
-           target="_blank" style="color: #67e8f9; text-decoration: none;">
-            View Dataset on physionet
+        <br><br>
+        Trained on 
+        <strong>A Large Scale 12-lead Electrocardiogram Database for Arrhythmia Study</strong> ·
+        <a href="https://physionet.org/content/ecg-arrhythmia/1.0.0/"
+           target="_blank"
+           style="color: #67e8f9; text-decoration: none;">
+            View Dataset on PhysioNet
         </a>
     </div>
     """,
