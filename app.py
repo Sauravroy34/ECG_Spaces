@@ -39,7 +39,7 @@ CONFIDENCE_THRESHOLD: float = 0.60
 # ======================================================================
 HF_REPO_ID = "Codemaster67/1DResnet50_Arythmia"
 HF_FILENAME = "model.pth"
-EXPECTED_LENGTH = 500
+EXPECTED_LENGTH = 5000
 
 
 # ======================================================================
@@ -419,8 +419,6 @@ with st.sidebar:
     st.markdown("#### 📤 Upload ECG Data")    
     st.caption("Model was trained on *5000 data points** (10 senconds ecg sampled at 500HZ) (single-lead ECG lead II).")
 
-    st.caption("Upload a file with **5000 data points** (10 senconds ecg sampled at 500HZ) (single-lead ECG lead II).")
-
     uploaded_file = st.file_uploader(
         "Choose file",
         type=["csv", "txt", "npy"],
@@ -684,6 +682,12 @@ st.markdown(
         <a href="https://huggingface.co/Codemaster67/1DResnet50_Arythmia" 
            target="_blank" style="color: #67e8f9; text-decoration: none;">
             View on HuggingFace
+        </a>
+
+        Trained on 'a-large-scale-12-lead-electrocardiogram-database-for-arrhythmia-study-1.0.0' dataset · 
+        <a href="https://physionet.org/content/ecg-arrhythmia/1.0.0/" 
+           target="_blank" style="color: #67e8f9; text-decoration: none;">
+            View Dataset on physionet
         </a>
     </div>
     """,
