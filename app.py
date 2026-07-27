@@ -37,8 +37,8 @@ CONFIDENCE_THRESHOLD: float = 0.60
 # ======================================================================
 #  Constants
 # ======================================================================
-HF_REPO_ID = "Codemaster67/ECG_Arythmia"
-HF_FILENAME = "ECG_model_6_classes.pth"
+HF_REPO_ID = "Codemaster67/1DResnet_Arythmia_50percent"
+HF_FILENAME = "model.pth"
 EXPECTED_LENGTH = 5000
 
 
