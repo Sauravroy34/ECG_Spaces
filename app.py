@@ -321,7 +321,8 @@ def run_inference(model: ECG_1D, ecg_data: np.ndarray):
     probs : np.ndarray  — shape (NUM_CLASSES,), softmax probabilities
     pred_idx : int       — index of highest-probability class
     """
-    tensor = torch.tensor(ecg_data, dtype=torch.float32).reshape(1, 1, len(ecg_data))
+    size = ecg_data.shape[-1]
+    tensor = torch.tensor(ecg_data, dtype=torch.float32).reshape(1, 1, size)
     with torch.no_grad():
         logits = model(tensor)
     probs = F.softmax(logits, dim=1).squeeze().numpy()
@@ -417,7 +418,7 @@ with st.sidebar:
 
     # Upload section
     st.markdown("#### 📤 Upload ECG Data")    
-    st.caption("Model was trained on *5000 data points** (10 senconds ecg sampled at 500HZ) (single-lead ECG lead II).")
+    st.caption("Model was trained on **5000 data points** (10 senconds ecg sampled at 500HZ) (single-lead ECG lead II).")
 
     uploaded_file = st.file_uploader(
         "Choose file",
