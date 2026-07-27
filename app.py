@@ -516,7 +516,7 @@ if ecg_data is None:
             </div>
             <div style="font-size: 14px; color: #64748b; max-width: 480px; margin: 0 auto; line-height: 1.6;">
                 Use the sidebar to upload a CSV, TXT, or NPY file containing
-                <strong style="color: #67e8f9;">500 data points</strong> from a single-lead ECG recording.
+                <strong style="color: #67e8f9;">5000 (10 seconds sampled at 500Hz) data points</strong> from a single-lead ECG recording.
                 You can also paste data as a JSON array.
             </div>
             <div style="margin-top: 24px;">
