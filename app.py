@@ -314,14 +314,14 @@ def run_inference(model: ECG_1D, ecg_data: np.ndarray):
     ----------
     model : ECG_1D
     ecg_data : np.ndarray
-        1D array of 500 data points.
+        1D array of ECG data.
 
     Returns
     -------
     probs : np.ndarray  — shape (NUM_CLASSES,), softmax probabilities
     pred_idx : int       — index of highest-probability class
     """
-    tensor = torch.tensor(ecg_data, dtype=torch.float32).reshape(1, 1, EXPECTED_LENGTH)
+    tensor = torch.tensor(ecg_data, dtype=torch.float32).reshape(1, 1, len(ecg_data))
     with torch.no_grad():
         logits = model(tensor)
     probs = F.softmax(logits, dim=1).squeeze().numpy()
@@ -386,9 +386,8 @@ def parse_ecg_input(uploaded_file=None, json_text: str = "") -> tuple:
             return None, None  # No input yet — not an error
 
         if len(data) < EXPECTED_LENGTH:
-            return None, (
-                f"**Insufficient data points.** Expected {EXPECTED_LENGTH}, "
-                f"got {len(data)}. Please provide exactly {EXPECTED_LENGTH} values."
+            st.sidebar.info(
+                f"Input had {len(data)} points. Expected {EXPECTED_LENGTH} Prediction might be inaccurate."
             )
 
         if len(data) > EXPECTED_LENGTH:
@@ -418,7 +417,7 @@ with st.sidebar:
 
     # Upload section
     st.markdown("#### 📤 Upload ECG Data")
-    st.caption("Upload a file with **500 data points** (single-lead ECG lead II).")
+    st.caption("Upload a file with **500 data points** (10 senconds ecg sampled at 500HZ) (single-lead ECG lead II).")
 
     uploaded_file = st.file_uploader(
         "Choose file",
